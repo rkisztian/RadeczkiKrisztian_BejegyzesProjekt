@@ -28,6 +28,8 @@ public class Main {
             System.out.println(e.getMessage());
         }
         veletlenszeruLikeOsztas();
+        bejegyzesModositasa();
+
     }
 
 
@@ -83,4 +85,11 @@ public class Main {
         }
 
     }
+
+    private static void bejegyzesModositasa(){
+        System.out.println("Kérem, adjonb meg egy szöveget, amire modosítjuk a tartalmat.");
+        String modositas = sc.nextLine();
+        bejegyzesekLista.get(1).setTartalom(modositas);
+    }
+
 }
