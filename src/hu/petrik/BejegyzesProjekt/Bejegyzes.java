@@ -8,6 +8,9 @@ public class Bejegyzes {
 
 
     private String szerzo;
+
+
+
     private String tartalom;
 
     private int likeok;
@@ -31,8 +34,18 @@ public class Bejegyzes {
         return tartalom;
     }
 
+    public void setTartalom(String tartalom) {
+        this.tartalom = tartalom;
+        this.szerkesztve = LocalDateTime.now();
+    }
+
+
     public int getLikeok() {
         return likeok;
+    }
+
+    public void like(){
+        likeok++;
     }
 
     public LocalDateTime getLetrejott() {
@@ -51,5 +64,5 @@ public class Bejegyzes {
 
 
 
-    
+
 }
