@@ -1,16 +1,11 @@
 package hu.petrik.BejegyzesProjekt;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Bejegyzes {
 
-
-
-
     private String szerzo;
-
-
-
     private String tartalom;
 
     private int likeok;
@@ -57,12 +52,17 @@ public class Bejegyzes {
     }
 
 
+    @Override
+    public String toString() {
+        DateTimeFormatter bejegyzesletrejott =
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-
-
-
-
-
-
-
+        return String.format("Szerzo :%s - Likeok :%d - Letrejött :%s \n" +
+                "Szerkesztve :%s \n" +
+                "Tartalom : %s",
+                this.szerzo, this.likeok, this.letrejott,
+                this.szerkesztve,
+                this.tartalom
+        );
+    }
 }
