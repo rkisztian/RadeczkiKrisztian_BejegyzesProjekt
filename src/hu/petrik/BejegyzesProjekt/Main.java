@@ -1,5 +1,6 @@
 package hu.petrik.BejegyzesProjekt;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,8 +17,29 @@ public class Main {
             } catch (RuntimeException e){
                 System.out.println("A db szám csak pozitiv egész szám lehet.");
             }
+            String fajlNev ="bejegyzesek.csv";
+            try {
+                bejegyzesekFelveteleSzovegeAllomanybol(fajlNev);
+            }catch (FileNotFoundException e){
+                System.out.println("Hiba! Nem találhato a megadott fájl.");
+            }catch (IOException e){
+                System.out.println("Ismeretlen Hiba történt a forrás fájl ovasása után");
+                System.out.println(e.getMessage());
+            }
+        }
+
+
+        private static void bejegyzesekHozzaadasa(){
+            Bejegyzes ujbejegyzes = new Bejegyzes("Radeczki Krisztián",
+                    "Nem tudtam kihúzni a hunterem wotlk serveren,");
+
+            Bejegyzes ujbejegyzes1 = new Bejegyzes("Szabo Bence",
+                    "Nem tudta kihúzni a Paladint wotlk szerveren, és még le is maradt");
+            bejegyzesekLista.add(ujbejegyzes);
+            bejegyzesekLista.add(ujbejegyzes1);
 
         }
+
 
         private static void bejegyzesFelvetele(){
             System.out.println("Kérem adjon meg egy darabszámot: ");
@@ -36,16 +58,18 @@ public class Main {
 
         }
 
-
-        private static void bejegyzesekHozzaadasa(){
-            Bejegyzes ujbejegyzes = new Bejegyzes("Radeczki Krisztián",
-                    "Nem tudtam kihúzni a hunterem wotlk serveren,");
-
-            Bejegyzes ujbejegyzes1 = new Bejegyzes("Szabo Bence",
-                    "Nem tudta kihúzni a Paladint wotlk szerveren, és még le is maradt");
-            bejegyzesekLista.add(ujbejegyzes);
-            bejegyzesekLista.add(ujbejegyzes1);
-
+        private static void bejegyzesekFelveteleSzovegeAllomanybol(String fajlNev) throws IOException {
+            FileReader fr = new FileReader(fajlNev);
+            BufferedReader br = new BufferedReader(fr);
+            String sor = br.readLine();
+            while (sor != null && !sor.isEmpty()){
+                String[] adatok = sor.split(";");
+                Bejegyzes bejegyzes = new Bejegyzes(adatok[0], adatok[1]);
+                bejegyzesekLista.add(bejegyzes);
+                sor = br.readLine();
+            }
+            br.close();
+            fr.close();
         }
 
 }
